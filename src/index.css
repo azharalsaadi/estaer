@@ -1,0 +1,142 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: "Segoe UI", Arial, sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-neutral: var(--neutral);
+  --color-neutral-foreground: var(--neutral-foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Estaer brand tokens — approved monochrome palette. Derived from the
+ * teal/mint identity (docs/DESIGN_SYSTEM_REFERENCE.md) by converting
+ * every value with Y = round(0.299R + 0.587G + 0.114B), RGB = (Y,Y,Y),
+ * per Estaer-Monochrome-Handoff/DESIGN-SPEC.md.
+ */
+:root {
+  --background: #fcfcfc;
+  --foreground: #303030;
+  --card: #ffffff;
+  --card-foreground: #303030;
+  --popover: #ffffff;
+  --popover-foreground: #303030;
+  --primary: #595959;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: #595959;
+  --muted: #f1f1f1;
+  --muted-foreground: #757575;
+  --accent: #f1f1f1;
+  --accent-foreground: #303030;
+  --destructive: #686868;
+  --destructive-foreground: #ffffff;
+  --success: #efefef;
+  --success-foreground: #5a5a5a;
+  --warning: #f4f4f4;
+  --warning-foreground: #686868;
+  --neutral: #efefef;
+  --neutral-foreground: #6e6e6e;
+  --border: #e9e9e9;
+  --input: #d7d7d7;
+  --ring: #868686;
+  --radius: 0.625rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #303030;
+  --sidebar-primary: #595959;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f1f1;
+  --sidebar-accent-foreground: #595959;
+  --sidebar-border: #e9e9e9;
+  --sidebar-ring: #868686;
+}
+
+.dark {
+  --background: #171717;
+  --foreground: #f6f6f6;
+  --card: #232323;
+  --card-foreground: #f6f6f6;
+  --popover: #232323;
+  --popover-foreground: #f6f6f6;
+  --primary: #868686;
+  --primary-foreground: #171717;
+  --secondary: #2d2d2d;
+  --secondary-foreground: #f6f6f6;
+  --muted: #2d2d2d;
+  --muted-foreground: #b0b0b0;
+  --accent: #2d2d2d;
+  --accent-foreground: #f6f6f6;
+  --destructive: #787878;
+  --destructive-foreground: #f6f6f6;
+  --success: #303030;
+  --success-foreground: #bebebe;
+  --warning: #2f2f2f;
+  --warning-foreground: #c6c6c6;
+  --neutral: #303030;
+  --neutral-foreground: #b2b2b2;
+  --border: #323232;
+  --input: #323232;
+  --ring: #868686;
+  --sidebar: #232323;
+  --sidebar-foreground: #f6f6f6;
+  --sidebar-primary: #868686;
+  --sidebar-primary-foreground: #171717;
+  --sidebar-accent: #2d2d2d;
+  --sidebar-accent-foreground: #f6f6f6;
+  --sidebar-border: #323232;
+  --sidebar-ring: #868686;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 15px;
+  }
+  html {
+    @apply font-sans;
+  }
+}
