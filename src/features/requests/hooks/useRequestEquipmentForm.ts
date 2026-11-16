@@ -42,6 +42,23 @@ export function useRequestEquipmentForm(itemId: string, onOpenChange: (open: boo
   const returnDue = endDate && endDate >= today ? getReturnDueDate(endDate) : null
   const confirmReturnDue = pendingValues ? getReturnDueDate(pendingValues.end_date) : null
 
+  // Sets the start date and, if the already-chosen end date now falls
+  // before it, clears the end date so the member must pick a valid one.
+  // An end date equal to the start date (same-day booking) is kept.
+  const onStartDateChange = (value: string) => {
+    form.setValue("start_date", value, {
+      shouldDirty: true,
+      shouldValidate: form.formState.isSubmitted,
+    })
+    const currentEnd = form.getValues("end_date")
+    if (currentEnd && currentEnd < value) {
+      form.setValue("end_date", "", {
+        shouldDirty: true,
+        shouldValidate: form.formState.isSubmitted,
+      })
+    }
+  }
+
   // Validate first (handleSubmit's zod resolver), then — if valid — open
   // the confirmation step instead of submitting directly. The form
   // dialog underneath stays open and untouched, so Cancel on the
@@ -80,6 +97,7 @@ export function useRequestEquipmentForm(itemId: string, onOpenChange: (open: boo
     form,
     startDate,
     endDate,
+    onStartDateChange,
     returnDue,
     onSubmit,
     createRequest,

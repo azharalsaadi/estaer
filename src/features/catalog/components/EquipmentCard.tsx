@@ -37,7 +37,7 @@ export function EquipmentCard({ item, footer }: EquipmentCardProps) {
             }}
             className={
               showUploadedImage
-                ? "h-full w-full object-cover grayscale"
+                ? "h-full w-full object-cover"
                 : "h-[170px] w-[85%] object-contain"
             }
           />

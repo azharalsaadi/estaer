@@ -48,7 +48,13 @@ export function DateFieldPopover({
             "border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 flex h-8 w-full min-w-0 items-center justify-between gap-2 rounded-lg border bg-transparent px-2.5 py-1 text-base transition-colors outline-none focus-visible:ring-3 aria-invalid:ring-3 md:text-sm"
           )}
         >
-          <span dir="ltr" className={value ? "text-foreground" : "text-muted-foreground"}>
+          <span
+            dir={value ? "ltr" : undefined}
+            className={cn(
+              "min-w-0 truncate",
+              value ? "text-foreground" : "text-muted-foreground"
+            )}
+          >
             {value || placeholder}
           </span>
           <CalendarIcon

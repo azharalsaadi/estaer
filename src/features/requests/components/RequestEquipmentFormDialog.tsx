@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { DateFieldPopover } from "./DateFieldPopover"
 import { useRequestEquipmentForm } from "../hooks/useRequestEquipmentForm"
-import { doesRangeCrossBooking } from "../lib/bookingOverlap"
+import { doesRangeCrossBooking, isDateBooked } from "../lib/bookingOverlap"
 import { localDateToIso } from "../lib/dates"
 
 type RequestEquipmentFormDialogProps = {
@@ -53,6 +53,7 @@ export function RequestEquipmentFormDialog({
       formState: { errors },
     },
     startDate,
+    onStartDateChange,
     returnDue,
     onSubmit,
     createRequest,
@@ -101,7 +102,7 @@ export function RequestEquipmentFormDialog({
             ) : (
               <>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div className="flex flex-col">
+                  <div className="flex min-w-0 flex-col">
                     <Label htmlFor="request-start-date" className="text-sm leading-5">
                       {t("fields.startDate")}
                     </Label>
@@ -113,10 +114,13 @@ export function RequestEquipmentFormDialog({
                           <DateFieldPopover
                             id="request-start-date"
                             value={field.value}
-                            onChange={field.onChange}
+                            onChange={onStartDateChange}
                             bookedRanges={bookedRanges}
-                            disabled={(date) => localDateToIso(date) < today}
-                            placeholder={t("requests.selectDatePlaceholder")}
+                            disabled={(date) => {
+                              const iso = localDateToIso(date)
+                              return iso < today || isDateBooked(iso, bookedRanges)
+                            }}
+                            placeholder={t("fields.selectDatePlaceholder")}
                             open={openField === "start"}
                             onOpenChange={(isOpen) =>
                               setOpenField(isOpen ? "start" : null)
@@ -132,7 +136,7 @@ export function RequestEquipmentFormDialog({
                       </p>
                     )}
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex min-w-0 flex-col">
                     <Label htmlFor="request-end-date" className="text-sm leading-5">
                       {t("fields.lastDayOfUse")}
                     </Label>
@@ -153,7 +157,7 @@ export function RequestEquipmentFormDialog({
                                 doesRangeCrossBooking(startDate, iso, bookedRanges)
                               )
                             }}
-                            placeholder={t("requests.selectDatePlaceholder")}
+                            placeholder={t("fields.selectDatePlaceholder")}
                             open={openField === "end"}
                             onOpenChange={(isOpen) => setOpenField(isOpen ? "end" : null)}
                             aria-invalid={!!errors.end_date}

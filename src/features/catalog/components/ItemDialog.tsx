@@ -288,7 +288,7 @@ export function ItemDialog({ open, onOpenChange, item }: ItemDialogProps) {
                     <img
                       src={previewUrl}
                       alt=""
-                      className="size-full object-cover grayscale"
+                      className="size-full object-cover"
                       onError={() => setFailedPreviewUrl(previewUrl)}
                     />
                   ) : (
